@@ -3,6 +3,8 @@ A Packer template that simplifies the creation of minimally-sized, fully patched
 
 This repo and much of its content are covered in detail from [this blog post](http://www.hurryupandwait.io/blog/creating-windows-base-images-for-virtualbox-and-hyper-v-using-packer-boxstarter-and-vagrant). Also see [this post](http://www.hurryupandwait.io/blog/a-packer-template-for-windows-nano-server-weighing-300mb) specifically for the Nano Server template.
 
+this repo fix to build window server 2016
+
 ## Prerequisites
 
 You need the following to run the template:
@@ -36,3 +38,10 @@ See [this blog post](http://www.hurryupandwait.io/blog/creating-a-hyper-v-vagran
 [Boxstarter](http://boxstarter.org) is used by some templates for initial provisioning. Due to the fact that provisioning takes place in the builder and not a provisioner, it can be difficult to gain visibility into why things go wrong from the same console where `packer` is run.
 
 Boxstarter will log all package activity output to `$env:LocalAppData\Boxstarter\boxstarter.log` on the guest.
+
+## how to use in hbsmith
+- we use this repo for build windows server 2016
+- run under command, you can get windws server 2016 box file
+```
+$ packer build -force -only virtualbox-iso vbox-2016.json
+```
