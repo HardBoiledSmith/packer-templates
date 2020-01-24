@@ -39,9 +39,52 @@ See [this blog post](http://www.hurryupandwait.io/blog/creating-a-hyper-v-vagran
 
 Boxstarter will log all package activity output to `$env:LocalAppData\Boxstarter\boxstarter.log` on the guest.
 
-## how to use in hbsmith
+## How to Use in HBsmith
 - we use this repo for build windows server 2016
 - run under command, you can get windws server 2016 box file
 ```
+cd cookbooks/packer-template
+```
+
+```
+sed -i  '.back' '/depends.*windows/d' metadata.rb
+```
+
+```
+rm Berksfile.lock
+```
+
+```
+berks vendor ../../vendor/cookbooks
+```
+
+```
+cd ../..
+```
+
+```
 $ packer build -force -only virtualbox-iso vbox-2016.json
 ```
+
+## How to Add Vagrant Box Locally
+```
+vagrant box add [new box name] [box file]
+```
+
+ex)
+
+```
+vagrant box add  win2016-test ./windows2016min-virtualbox.box
+```
+
+## How to Upload Vagrant Box to Vagrant Cloud
+https://blog.ycshao.com/2017/09/16/how-to-upload-vagrant-box-to-vagrant-cloud/
+1. login to https://app.vagrantup.com/
+1. click `New Vagrant Box` at Dashboard
+1. enter name (visibility, description is optional) and click `Create box`.
+1. enter version `ex) 0.0.1` and click `Create version`.
+1. click `Add a proviser`
+1. enter the provider name, such as `virtualbox`, select `Upload to Vagrant Cloud`, and click `Continue to upload`
+1. upload file (should be `.box` file, the file you generated at `packer-templates` repository, not the folder or `.vmdk` file you made by `vagrant box add` command)
+1. go back to your repository and click `Release...`
+1. click `Release version`
