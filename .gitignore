@@ -8,3 +8,6 @@ output-qemu
 vendor
 Vagrantfile
 .vagrant/
+metadata.rb.back
+packer_cache/
+.idea/
